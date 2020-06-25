@@ -1,6 +1,8 @@
 package main
 
 import (
+	"errors"
+
 	bhiLogger "github.com/imm-llc/go-gelf-logger/gologger"
 )
 
@@ -17,5 +19,7 @@ func main() {
 	}
 
 	bhiLogger.Info("foo", "foo bar whiz", map[string]interface{}{"hello": "world", "x": 1})
+
+	bhiLogger.Error("foo", "foo bar whiz", map[string]interface{}{"hello": "world", "x": 1}, errors.New("Testing"))
 
 }
