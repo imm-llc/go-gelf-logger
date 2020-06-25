@@ -1,7 +1,7 @@
 package main
 
 import (
-	bhiLogger "github.com/imm-llc/bhi-logger/gologger"
+	bhiLogger "github.com/imm-llc/go-gelf-logger/gologger"
 )
 
 func main() {
