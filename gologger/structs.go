@@ -5,3 +5,17 @@ type LoggerConfig struct {
 	GraylogHostname string
 	GraylogPort     int
 }
+
+type LogItems struct {
+	ShortMsg    string
+	FullMsg     string
+	ExtraFields map[string]interface{}
+	ErrorMsg    error
+}
+
+// GrayLogger provides an interface to call our logging funcs
+type GrayLogger interface {
+	Info() error
+	Warning() error
+	Error() error
+}

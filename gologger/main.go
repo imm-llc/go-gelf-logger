@@ -7,9 +7,7 @@ import (
 	"gopkg.in/Graylog2/go-gelf.v2/gelf"
 )
 
-//func main() {}
-
-// InitLogger creates our gelf.UDPWriter from te provided LoggerConfig pointer
+// InitLogger creates our gelf.UDPWriter from the provided LoggerConfig pointer
 func InitLogger(c *LoggerConfig) error {
 	var err error
 

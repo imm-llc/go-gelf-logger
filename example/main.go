@@ -8,7 +8,7 @@ import (
 
 func main() {
 	c := bhiLogger.LoggerConfig{
-		GraylogHostname: "logs.juooce.com",
+		GraylogHostname: "127.0.0.1",
 		GraylogPort:     11111,
 	}
 
@@ -18,8 +18,24 @@ func main() {
 		panic("Faied to set up logger")
 	}
 
-	bhiLogger.Info("foo", "foo bar whiz", map[string]interface{}{"hello": "world", "x": 1})
+	var i bhiLogger.LogItems
 
-	bhiLogger.Error("foo", "foo bar whiz", map[string]interface{}{"hello": "world", "x": 1}, errors.New("Testing"))
+	i = bhiLogger.LogItems{
+		ShortMsg:    "foo",
+		FullMsg:     "foo bar whiz",
+		ExtraFields: map[string]interface{}{"hello": "world", "x": 1},
+		ErrorMsg:    nil,
+	}
+
+	bhiLogger.GrayLogger.Info(i)
+
+	i = bhiLogger.LogItems{
+		ShortMsg:    "foo",
+		FullMsg:     "foo bar whiz",
+		ExtraFields: map[string]interface{}{"hello": "world", "x": 1},
+		ErrorMsg:    errors.New("Bad thing"),
+	}
+
+	bhiLogger.GrayLogger.Error(i)
 
 }

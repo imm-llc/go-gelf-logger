@@ -25,5 +25,7 @@ func TestFailHostnameLogger(t *testing.T) {
 
 	if err == nil {
 		t.Errorf("Initialized invalid hostname logger")
+	} else {
+		t.FailNow()
 	}
 }

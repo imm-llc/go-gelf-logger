@@ -5,9 +5,9 @@ import (
 )
 
 // Info logs an info (level 6) message to Graylog with the provided short message (s), full message (f), and extra fields (ef)
-func Info(s string, f string, ef map[string]interface{}) error {
+func (l LogItems) Info() error {
 	h, _ := os.Hostname()
-	m := wrapBuildGraylogMessage(s, f, 6, ef, h)
+	m := wrapBuildGraylogMessage(l.ShortMsg, l.FullMsg, 6, l.ExtraFields, h)
 
 	sendGraylogMessage(m)
 
@@ -15,9 +15,9 @@ func Info(s string, f string, ef map[string]interface{}) error {
 }
 
 // Warning logs a warning (level 4) message to Graylog
-func Warning(s string, f string, ef map[string]interface{}) error {
+func (l LogItems) Warning() error {
 	h, _ := os.Hostname()
-	m := wrapBuildGraylogMessage(s, f, 4, ef, h)
+	m := wrapBuildGraylogMessage(l.ShortMsg, l.FullMsg, 4, l.ExtraFields, h)
 
 	sendGraylogMessage(m)
 
@@ -26,11 +26,12 @@ func Warning(s string, f string, ef map[string]interface{}) error {
 
 // Error logs an error (level 3) message to Graylog. This function requires you pass it an error that implements an Error() function
 // {"ErrorMessage": e.Error()} will be appended to the extra fields passed to this function
-func Error(s string, f string, ef map[string]interface{}, e error) error {
+func (l LogItems) Error() error {
 	h, _ := os.Hostname()
-	ef["ErrorMessage"] = e.Error()
 
-	m := wrapBuildGraylogMessage(s, f, 3, ef, h)
+	l.ExtraFields["ErrorMessage"] = l.ErrorMsg.Error()
+
+	m := wrapBuildGraylogMessage(l.ShortMsg, l.FullMsg, 3, l.ExtraFields, h)
 
 	sendGraylogMessage(m)
 
