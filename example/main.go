@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 
+	"github.com/imm-llc/go-gelf-logger/example/subdir"
 	bhiLogger "github.com/imm-llc/go-gelf-logger/gologger"
 )
 
@@ -17,6 +18,9 @@ func main() {
 	if err != nil {
 		panic("Faied to set up logger")
 	}
+
+	subdir.LogMessage()
+	//os.Exit(0)
 
 	var i bhiLogger.LogItems
 
