@@ -35,7 +35,7 @@ func TestLogInfo(t *testing.T) {
 
 func TestLogInfoWithExtraFields(t *testing.T) {
 	c := LoggerConfig{
-		GraylogHostname: "logs.juooce.com",
+		GraylogHostname: "localhost",
 		GraylogPort:     11111,
 	}
 
