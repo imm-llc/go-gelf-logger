@@ -4,7 +4,7 @@ import "testing"
 
 func TestInitLogger(t *testing.T) {
 	c := LoggerConfig{
-		GraylogHostname: "logs.juooce.com",
+		GraylogHostname: "127.0.0.1",
 		GraylogPort:     11111,
 	}
 
