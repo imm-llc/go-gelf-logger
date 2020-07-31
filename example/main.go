@@ -20,7 +20,6 @@ func main() {
 	}
 
 	subdir.LogMessage()
-	//os.Exit(0)
 
 	var i bhiLogger.LogItems
 
