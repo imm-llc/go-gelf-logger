@@ -10,14 +10,17 @@ func buildGraylogLogMessage(s string, f string, ef map[string]interface{}, e err
 }
 
 //LogInfo wraps around GrayLogger to make it simpler to log messages.
-func LogInfo(shortMessage string, fullMessage string, extraFields map[string]interface{}, err error) error {
+func LogInfo(shortMessage string, fullMessage string, tag string, extraFields map[string]interface{}, err error) error {
+	extraFields["tag"] = tag
 	return GrayLogger.Info(buildGraylogLogMessage(shortMessage, fullMessage, extraFields, err))
 }
 
-func LogWarning(shortMessage string, fullMessage string, extraFields map[string]interface{}, err error) error {
+func LogWarning(shortMessage string, fullMessage string, tag string, extraFields map[string]interface{}, err error) error {
+	extraFields["tag"] = tag
 	return GrayLogger.Warning(buildGraylogLogMessage(shortMessage, fullMessage, extraFields, err))
 }
 
-func LogError(shortMessage string, fullMessage string, extraFields map[string]interface{}, err error) error {
+func LogError(shortMessage string, fullMessage string, tag string, extraFields map[string]interface{}, err error) error {
+	extraFields["tag"] = tag
 	return GrayLogger.Error(buildGraylogLogMessage(shortMessage, fullMessage, extraFields, err))
 }
