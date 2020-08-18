@@ -37,11 +37,10 @@ TLS_INPUT='{
     "title": "tls",
     "configuration": {
         "bind_address": "0.0.0.0",
-        "port": 12204,
+        "port": 11112,
         "tls_enable": true,
         "tls_cert_file": "/usr/share/graylog/data/cert.pem",
-        "tls_key_file": "/usr/share/graylog/data/key.pem",
-        "tls_key_password": "secret"
+        "tls_key_file": "/usr/share/graylog/data/key.pem"
     },
     "type": "org.graylog2.inputs.gelf.tcp.GELFTCPInput",
     "global": true
@@ -67,9 +66,9 @@ curl -u admin:admin "$API_URL/search/universal/relative?query=test&range=5&field
 
 curl -u admin:admin -X "POST" -H "Content-Type: application/json" -H "X-Requested-By: cli" -d "${TCP_INPUT}" "$INPUTS_URL"
 curl -u admin:admin -X "POST" -H "Content-Type: application/json" -H "X-Requested-By: cli" -d "${UDP_INPUT}" "$INPUTS_URL"
+curl -u admin:admin -X "POST" -H "Content-Type: application/json" -H "X-Requested-By: cli" -d "${TLS_INPUT}" "$INPUTS_URL"
 
 #curl -u admin:admin -X "POST" -H "Content-Type: application/json" -H "X-Requested-By: cli" -d "${HTTP_INPUT}" "$INPUTS_URL"
-#curl -u admin:admin -X "POST" -H "Content-Type: application/json" -H "X-Requested-By: cli" -d "${TLS_INPUT}" "$INPUTS_URL"
 #curl -u admin:admin -X "POST" -H "Content-Type: application/json" -H "X-Requested-By: cli" -d "${HTTPS_INPUT}" "$INPUTS_URL"
 
 exit 0
