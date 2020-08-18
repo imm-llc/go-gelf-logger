@@ -1,31 +1,39 @@
 package gologger
 
-import "testing"
+import (
+	"testing"
+)
 
-func TestInitLogger(t *testing.T) {
-	c := LoggerConfig{
-		GraylogHostname: "127.0.0.1",
+func TestInitUDPLogger(t *testing.T) {
+	c := &LoggerConfig{
+		GraylogHostname: "localhost",
 		GraylogPort:     11111,
 	}
 
-	err := InitLogger(&c)
+	err := InitUDPLogger(c)
 
 	if err != nil {
 		t.Errorf("Error initializing logger %s", err.Error())
 	}
+
+	if writer.UDPWriter == nil {
+		t.Errorf("UDPWriter is nil")
+	}
 }
 
-func TestFailHostnameLogger(t *testing.T) {
-	c := LoggerConfig{
-		GraylogHostname: "fdandaibfa",
+func TestInitTCPLogger(t *testing.T) {
+	c := &LoggerConfig{
+		GraylogHostname: "localhost",
 		GraylogPort:     11111,
 	}
 
-	err := InitLogger(&c)
+	err := InitTCPLogger(c)
 
-	if err == nil {
-		t.Errorf("Initialized invalid hostname logger")
-	} else {
-		t.FailNow()
+	if err != nil {
+		t.Errorf("Error initializing logger %s", err.Error())
+	}
+
+	if writer.TCPWriter == nil {
+		t.Errorf("TCPWriter is nil")
 	}
 }

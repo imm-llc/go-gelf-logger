@@ -22,10 +22,14 @@ func wrapBuildGraylogMessage(shortMsg string, fullMsg string, level int32, extra
 	return m
 }
 
-func sendGraylogMessage(m *gelf.Message) {
-	err := gelfWriter.WriteMessage(m)
-
-	if err != nil {
-		log.Println("ERROR: Error sending message to Graylog", err.Error())
+func sendGraylogMessageV2(m *gelf.Message) {
+	if writer.TCPWriter == nil {
+		if err := writer.UDPWriter.WriteMessage(m); err != nil {
+			log.Println("ERROR: Error sending message to Graylog", err.Error())
+		}
+	} else {
+		if err := writer.TCPWriter.WriteMessage(m); err != nil {
+			log.Println("ERROR: Error sending message to Graylog", err.Error())
+		}
 	}
 }
