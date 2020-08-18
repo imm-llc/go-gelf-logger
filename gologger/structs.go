@@ -1,6 +1,8 @@
 package gologger
 
-import "gopkg.in/Graylog2/go-gelf.v2/gelf"
+import (
+	"gopkg.in/Graylog2/go-gelf.v2/gelf"
+)
 
 // LoggerConfig has the graylog server hostname (e.g. logs.example.com) and the input port (e.g. 12201)
 type LoggerConfig struct {
