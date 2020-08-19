@@ -15,11 +15,13 @@ func LogInfo(shortMessage string, fullMessage string, tag string, extraFields ma
 	return GrayLogger.Info(buildGraylogLogMessage(shortMessage, fullMessage, extraFields, err))
 }
 
+//LogWarning wraps around GrayLogger to make it simpler to log messages
 func LogWarning(shortMessage string, fullMessage string, tag string, extraFields map[string]interface{}, err error) error {
 	extraFields["tag"] = tag
 	return GrayLogger.Warning(buildGraylogLogMessage(shortMessage, fullMessage, extraFields, err))
 }
 
+//LogError wraps around GrayLogger to make it simpler to log messages
 func LogError(shortMessage string, fullMessage string, tag string, extraFields map[string]interface{}, err error) error {
 	extraFields["tag"] = tag
 	return GrayLogger.Error(buildGraylogLogMessage(shortMessage, fullMessage, extraFields, err))

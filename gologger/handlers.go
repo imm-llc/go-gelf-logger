@@ -9,7 +9,7 @@ func (l LogItems) Info() error {
 	h, _ := os.Hostname()
 	m := wrapBuildGraylogMessage(l.ShortMsg, l.FullMsg, 6, l.ExtraFields, h)
 
-	sendGraylogMessage(m)
+	sendGraylogMessageV2(m)
 
 	return nil
 }
@@ -19,7 +19,7 @@ func (l LogItems) Warning() error {
 	h, _ := os.Hostname()
 	m := wrapBuildGraylogMessage(l.ShortMsg, l.FullMsg, 4, l.ExtraFields, h)
 
-	sendGraylogMessage(m)
+	sendGraylogMessageV2(m)
 
 	return nil
 }
@@ -33,7 +33,7 @@ func (l LogItems) Error() error {
 
 	m := wrapBuildGraylogMessage(l.ShortMsg, l.FullMsg, 3, l.ExtraFields, h)
 
-	sendGraylogMessage(m)
+	sendGraylogMessageV2(m)
 
 	return nil
 }

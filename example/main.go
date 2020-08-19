@@ -13,7 +13,7 @@ func main() {
 		GraylogPort:     11111,
 	}
 
-	err := bhiLogger.InitLogger(&c)
+	err := bhiLogger.InitUDPLogger(&c)
 
 	if err != nil {
 		panic("Faied to set up logger")
