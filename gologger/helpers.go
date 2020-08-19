@@ -1,5 +1,7 @@
 package gologger
 
+import "os"
+
 func buildGraylogLogMessage(s string, f string, ef map[string]interface{}, e error) LogItems {
 	return LogItems{
 		ShortMsg:    s,
@@ -10,17 +12,21 @@ func buildGraylogLogMessage(s string, f string, ef map[string]interface{}, e err
 }
 
 //LogInfo wraps around GrayLogger to make it simpler to log messages.
-func LogInfo(shortMessage string, fullMessage string, tag string, extraFields map[string]interface{}, err error) error {
+func LogInfo(shortMessage string, fullMessage string, tag string, extraFields map[string]interface{}, err error) {
 	extraFields["tag"] = tag
-	return GrayLogger.Info(buildGraylogLogMessage(shortMessage, fullMessage, extraFields, err))
+	h, _ := os.Hostname()
+
+	sendGraylogMessage(wrapBuildGraylogMessage(shortMessage, fullMessage, 6, extraFields, h))
 }
 
-func LogWarning(shortMessage string, fullMessage string, tag string, extraFields map[string]interface{}, err error) error {
+func LogWarning(shortMessage string, fullMessage string, tag string, extraFields map[string]interface{}, err error) {
 	extraFields["tag"] = tag
-	return GrayLogger.Warning(buildGraylogLogMessage(shortMessage, fullMessage, extraFields, err))
+	h, _ := os.Hostname()
+	sendGraylogMessage(wrapBuildGraylogMessage(shortMessage, fullMessage, 4, extraFields, h))
 }
 
-func LogError(shortMessage string, fullMessage string, tag string, extraFields map[string]interface{}, err error) error {
+func LogError(shortMessage string, fullMessage string, tag string, extraFields map[string]interface{}, err error) {
 	extraFields["tag"] = tag
-	return GrayLogger.Error(buildGraylogLogMessage(shortMessage, fullMessage, extraFields, err))
+	h, _ := os.Hostname()
+	sendGraylogMessage(wrapBuildGraylogMessage(shortMessage, fullMessage, 3, extraFields, h))
 }
